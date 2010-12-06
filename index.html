@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>playing with canvas</title>
+  <meta charset=utf-8>
+  <script src=js/jquery.js></script>
+  <script src=js/jquery.autogrow.js></script>
+  <link rel=stylesheet href="css/style.css" media=screen >
+  <link rel=stylesheet href="css/print.css" media=print >
+<style>
+#c { 
+  border: 1px solid black;
+}
+
+#texts { 
+  width: 40%;
+  float: right;
+  overflow:auto;
+  min-height: 500px;
+}
+
+#texts textarea { 
+  width: 40%;
+}
+
+textarea #A { float:left; }
+textarea #B { float:right; }
+</style>
+</head>
+
+<body>
+<p><button id=calculate>calculate</button></p>
+<canvas id="c"></canvas>
+<div id=texts>
+<textarea id=A>anáhmi</textarea>
+<textarea id=B>ana mi</textarea>
+</div>
+
+
+<script>
+
+var canvas = document.getElementById("c"),
+    context = canvas.getContext("2d"),
+    A = $('#A').val(),
+    B = $('#B').val();
+
+
+
+function point(x,y){
+  context.fillStyle = 'blue';
+  context.fillRect(x, y, 1, 1);
+}
+
+function plot(){
+  canvas.width = B.length + 'px';
+  canvas.height = A.length + 'px';
+  for(var a = 0; a < A.length; a++){
+    for(var b = 0; b < B.length; b++){
+      if (A[a] == B[b]) {
+        point(a, b);
+      }
+    }
+  }
+} 
+
+
+$(document).ready(function(){
+
+  $('textarea#A, textarea#B').change(function(){
+    $(this).autogrow();
+  }) 
+  $('#calculate').click(plot)
+
+})
+
+</script>
+</body>
+
+</html>
+
