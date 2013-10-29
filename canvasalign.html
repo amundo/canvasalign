@@ -10,7 +10,9 @@
 <style>
 #c { 
   border: 1px solid black;
+  background:yellow;
 }
+  
 
 #texts { 
   width: 40%;
@@ -23,8 +25,11 @@
   width: 40%;
 }
 
-textarea #A { float:left; }
-textarea #B { float:right; }
+#texts {  width: 500px; float:right;}
+
+textarea #A {  }
+textarea #B {  }
+
 </style>
 </head>
 
@@ -48,14 +53,15 @@ var canvas = document.getElementById("c"),
 
 function point(x,y){
   context.fillStyle = 'blue';
-  context.fillRect(x, y, 1, 1);
+  context.fillRect(x, y, 2, 2);
 }
 
 function plot(){
-  canvas.width = B.length + 'px';
-  canvas.height = A.length + 'px';
+  canvas.width = B.length * 10 ;
+  canvas.height = A.length * 10 ;
   for(var a = 0; a < A.length; a++){
     for(var b = 0; b < B.length; b++){
+      console.log(a==b, a,b);
       if (A[a] == B[b]) {
         point(a, b);
       }
@@ -66,9 +72,6 @@ function plot(){
 
 $(document).ready(function(){
 
-  $('textarea#A, textarea#B').change(function(){
-    $(this).autogrow();
-  }) 
   $('#calculate').click(plot)
 
 })
